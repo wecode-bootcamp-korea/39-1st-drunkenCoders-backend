@@ -60,6 +60,12 @@ CREATE TABLE product_images(
     product_id INT NOT NULL
 );
 
+CREATE TABLE tags (
+   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+   name VARCHAR(200) NOT NULL UNIQUE,
+   product_id INT NOT NULL
+);
+
 -- migrate:down
 DROP TABLE product_images;
 DROP TABLE products;
@@ -70,3 +76,4 @@ DROP TABLE grains;
 DROP TABLE sweetness;
 DROP TABLE sourness;
 DROP TABLE carbon;
+DROP TABLE tags;

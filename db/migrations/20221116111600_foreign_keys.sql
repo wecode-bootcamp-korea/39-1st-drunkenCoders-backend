@@ -20,4 +20,6 @@ ALTER TABLE `comments` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 ALTER TABLE `comments` ADD FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
 
 ALTER TABLE `comments_images` ADD FOREIGN KEY (`comment_id`) REFERENCES `comments` (`id`);
+
+ALTER TABLE `tags` ADD FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
 -- migrate:down
