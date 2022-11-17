@@ -7,7 +7,9 @@ CREATE TABLE comments (
   user_id INT NOT NULL,
   product_id INT NOT NULL,
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP
+  updated_at TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP,
+  CONSTRAINT comments_users_id_fkey FOREIGN KEY (user_id) REFERENCES users(id),
+  CONSTRAINT comments_products_id_fkey FOREIGN KEY (product_id) REFERENCES products(id)
 );
 
   CREATE TABLE comments_images (
@@ -15,7 +17,8 @@ CREATE TABLE comments (
   image_url VARCHAR(2000) NULL,
   comment_id INT NOT NULL,
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP
+  updated_at TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP,
+  CONSTRAINT comments_images_comments_id_fkey FOREIGN KEY (comment_id) REFERENCES comments(id)
 );
 
 -- migrate:down
