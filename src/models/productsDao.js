@@ -18,7 +18,7 @@ const productsAll = async (sortCate) => {
         WHERE c.product_id = p.id 
         GROUP BY c.product_id) as reviews, 
     (SELECT 
-        AVG(c.rating)*100/5 
+        ROUND(AVG(c.rating)*100/5,2) 
         FROM comments c 
         WHERE c.product_id = p.id 
         GROUP BY c.product_id) as ratings 
