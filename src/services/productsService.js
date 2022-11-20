@@ -10,15 +10,11 @@ const productsAll = async (sort) => {
       priceHigh: "price DESC",
     };
     let order = sorting[sort];
-    if (!order) {
-      return (order = "NULL");
-    } else {
-      return {
-        toSqlString: function () {
-          return order;
-        },
-      };
-    }
+    return {
+      toSqlString: function () {
+        return order;
+      },
+    };
   };
 
   const products = await productsDao.productsAll(sortCate(sort));
