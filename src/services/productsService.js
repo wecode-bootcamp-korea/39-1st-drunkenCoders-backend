@@ -13,11 +13,13 @@ const productsAll = async (sort) => {
     if (!order) {
       return (order = "NULL");
     } else {
-      return order;
+      return {
+        toSqlString: function () {
+          return order;
+        },
+      };
     }
   };
-
-  console.log(sortCate(sort));
 
   const products = await productsDao.productsAll(sortCate(sort));
   return products;
