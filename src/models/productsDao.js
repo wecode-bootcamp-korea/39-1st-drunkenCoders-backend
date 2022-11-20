@@ -1,7 +1,6 @@
 const { appDataSource } = require("./data-source");
 
 const productsAll = async (whereCond, sortCate) => {
-  console.log(whereCond);
   const productsAll = await appDataSource.query(
     `
     SELECT 
