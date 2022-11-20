@@ -1,6 +1,7 @@
 const { appDataSource } = require("./data-source");
 
-const productsAll = async (sortCate) => {
+const productsAll = async (whereCond, sortCate) => {
+  console.log(whereCond);
   const productsAll = await appDataSource.query(
     `
     SELECT 
@@ -24,10 +25,12 @@ const productsAll = async (sortCate) => {
         GROUP BY c.product_id) as ratings 
     FROM products p 
     LEFT JOIN product_images pi ON p.id = pi.product_id 
-    LEFT JOIN tags t ON p.id = t.product_id 
+    LEFT JOIN tags t ON p.id = t.product_id
+    ?
     GROUP BY p.id, pi.image_url
-    ORDER BY ${sortCate};
-    `
+    ORDER BY ?;
+    `,
+    [whereCond, sortCate]
   );
   return productsAll;
 };
