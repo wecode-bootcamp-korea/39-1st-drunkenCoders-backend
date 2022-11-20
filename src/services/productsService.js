@@ -1,7 +1,6 @@
 const productsDao = require("../models/productsDao");
 
 const productsAll = async (sort) => {
-  console.log(sort);
   const sortCate = (sort) => {
     const sorting = {
       latest: "created_at DESC",
