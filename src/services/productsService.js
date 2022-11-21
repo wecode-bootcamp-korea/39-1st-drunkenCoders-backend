@@ -1,7 +1,7 @@
 const productsDao = require("../models/productsDao");
 
 const productsAll = async (
-  cate_id , sweetness , sourness , carbon , fruit , flower , grain , priceRange , sort) => {
+  cate_id , sweetness , sourness , carbon , fruit , flower , grain , priceRange , alchol , sort) => {
     const sortCate = (sort) => {
     const sorting = {
       latest: "created_at DESC",
@@ -20,7 +20,7 @@ const productsAll = async (
   };
 
   const whereList = (
-    cate_id , sweetness , sourness , carbon , fruit , flower , grain , priceRange) => {
+    cate_id , sweetness , sourness , carbon , fruit , flower , grain , priceRange , alchol ) => {
     const startLine = "WHERE ";
     const filter = ["p.id IS NOT NULL"];
     if (cate_id) {
@@ -47,6 +47,9 @@ const productsAll = async (
     if (priceRange) {
       filter.push(`price BETWEEN ${priceRange[0]} AND ${priceRange[1]}`);
     }
+    if (alchol) {
+      filter.push(`alchol BETWEEN ${alchol[0]} AND ${alchol[1]}`)
+    }
     const body = filter.join(" AND ");
     const combined = startLine + body;
     return {
@@ -57,7 +60,7 @@ const productsAll = async (
   };
 
   const products = await productsDao.productsAll(
-    whereList(cate_id , sweetness , sourness , carbon , fruit , flower , grain , priceRange),
+    whereList(cate_id , sweetness , sourness , carbon , fruit , flower , grain , priceRange , alchol),
     sortCate(sort)
   );
 

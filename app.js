@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
+const { globalErrorHandler } = require('./src/utils/errorHandler');
 
 dotenv.config();
 
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use(cors());
 app.use(morgan("dev"));
 app.use(routes);
+app.use(globalErrorHandler);
 
 //health check
 app.get("/ping", (req, res) => {
