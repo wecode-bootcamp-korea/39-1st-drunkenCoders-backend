@@ -17,7 +17,8 @@ const createUser = async (email, hashedPassword, nickname) => {
     const [user] = await AppDataSource.query(
         `
         SELECT 
-            users.email
+            email,
+            password
         FROM 
             users
         WHERE 
