@@ -26,7 +26,6 @@ const register = async (email, password, nickname) => {
 
 const login = async (email, password) => {
     const user = await userDao.getUserByEmail(email);
-
     if(!email.includes("@") || !email.includes(".")){
         const err = new Error("invalid email")
         err.statusCode= 400;
@@ -38,7 +37,6 @@ const login = async (email, password) => {
         err.statusCode = 404;
         throw err; 
     }
-
     const match = await bcrypt.compare(password, user.password);
     if (!match) {
         const err = new Error("invalid password");
