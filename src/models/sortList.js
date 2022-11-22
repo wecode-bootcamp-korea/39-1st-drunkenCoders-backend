@@ -8,7 +8,7 @@ const makeSort = (sort) => {
     };
     let order = sorting[sort];
     if (!order) {
-      order = "p.id IS NOT NULL";
+      order = "p.id";
       return {toSqlString: function () {return order;},};
     } else {
       return {toSqlString: function () {return order;},};
