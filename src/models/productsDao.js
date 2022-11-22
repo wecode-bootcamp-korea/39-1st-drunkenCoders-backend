@@ -1,7 +1,7 @@
-const { appDataSource } = require("./data-source");
+const { AppDataSource } = require("./data-source");
 
 const getAllProducts = async (whereCond, sortCate) => {
-  const getAllProducts = await appDataSource.query(
+  const getAllProducts = await AppDataSource.query(
     `
     SELECT 
         p.id,
@@ -35,7 +35,7 @@ const getAllProducts = async (whereCond, sortCate) => {
 };
 
 const getProductDetails = async (productId) => {
-  const details = await appDataSource.query(
+  const details = await AppDataSource.query(
     `
     SELECT 
       p.id,
@@ -70,7 +70,6 @@ const getProductDetails = async (productId) => {
     `,
     [productId]
   );
-  console.log(details)
   return details
 }
 
