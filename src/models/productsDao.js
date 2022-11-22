@@ -41,7 +41,7 @@ const getProductDetails = async (productId) => {
       p.id,
       p.name as product_name, 
       p.description, 
-      p.price, 
+      ROUND(p.price,0) as price, 
       pi.image_url, 
       p.capacity_ml, 
       p.alchol, 
@@ -57,7 +57,7 @@ const getProductDetails = async (productId) => {
       WHERE c.product_id = p.id 
       GROUP BY c.product_id) as reviews, 
     (SELECT 
-      AVG(c.rating)*100/5 
+      ROUND(AVG(c.rating)*100/5,0)
       FROM comments c 
       WHERE c.product_id = p.id 
       GROUP BY c.product_id) as ratings
