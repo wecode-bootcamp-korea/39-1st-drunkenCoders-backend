@@ -1,5 +1,5 @@
 //typeorm 실행파일
-const { DataSource } = require("typeorm");
+const { DataSource } = require('typeorm');
 
 const appDataSource = new DataSource({
   type: process.env.TYPEORM_CONNECTION,
@@ -14,10 +14,10 @@ appDataSource
   .initialize()
 
   .then(() => {
-    console.log("Data Source has been initialized!");
+    console.log('Data Source has been initialised!');
   })
   .catch((err) => {
-    console.error("Error during Data Source initialization", err);
+    console.error('Error during Data Source initialisation', err);
   });
 
 module.exports = { appDataSource };
