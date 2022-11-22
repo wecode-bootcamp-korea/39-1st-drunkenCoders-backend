@@ -1,4 +1,4 @@
-const { appDataSource } = require("./data-source");
+const { AppDataSource } = require("./data-source");
 const  whereList  = require("./whereList")
 const sortList = require("./sortList")
 const limitAndOffset = require("./limitAndOffset")
@@ -9,7 +9,7 @@ const getAllProducts = async (cate_id , sweetness , sourness , carbon , fruit , 
   const sortCategory = sortList.makeSort(sort);
   const limitOffset = limitAndOffset.setLimitOffset(limit, offset);
 
-  const productsAll = await appDataSource.query(
+  const productsAll = await AppDataSource.query(
     `
     SELECT 
         p.id,
