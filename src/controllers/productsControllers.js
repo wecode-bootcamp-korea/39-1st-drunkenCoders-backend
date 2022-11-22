@@ -1,12 +1,12 @@
 const productsService = require("../services/productsService");
 
-const productsAll = async (req, res) => {
-    const { cate_id , sweetness , sourness , carbon , fruit , flower , grain , priceRange , alchol , sort } = req.query
-
-    const products = await productsService.productsAll(
-      cate_id , sweetness , sourness , carbon , fruit , flower , grain , priceRange , alchol , sort);
+const getAllProducts = async (req, res) => {
+    const { cate_id , sweetness , sourness , carbon , fruit , flower , grain , priceRange , alchol , sort , limit , offset} = req.query
+    
+    const products = await productsService.getAllProducts(
+      cate_id , sweetness , sourness , carbon , fruit , flower , grain , priceRange , alchol , sort , limit , offset);
     
     return res.status(200).json({ data: products });
 };
 
-module.exports = { productsAll };
+module.exports = { getAllProducts };
