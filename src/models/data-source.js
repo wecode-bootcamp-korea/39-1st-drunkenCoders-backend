@@ -1,4 +1,3 @@
-//typeorm 실행파일
 const { DataSource } = require("typeorm");
 
 const AppDataSource = new DataSource({
