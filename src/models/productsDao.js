@@ -1,7 +1,15 @@
 const { AppDataSource } = require("./data-source");
+const  whereList  = require("./whereList")
+const sortList = require("./sortList")
+const limitAndOffset = require("./limitAndOffset")
 
-const getAllProducts = async (whereCond, sortCate) => {
-  const getAllProducts = await AppDataSource.query(
+const getAllProducts = async (cate_id , sweetness , sourness , carbon , fruit , flower , grain , priceRange , alchol, sort , limit, offset) => {
+
+  const whereCond = whereList.makeWhereList(cate_id , sweetness , sourness , carbon , fruit , flower , grain , priceRange , alchol);
+  const sortCategory = sortList.makeSort(sort);
+  const limitOffset = limitAndOffset.setLimitOffset(limit, offset);
+
+  const productsAll = await AppDataSource.query(
     `
     SELECT 
         p.id,
@@ -27,11 +35,12 @@ const getAllProducts = async (whereCond, sortCate) => {
     LEFT JOIN tags t ON p.id = t.product_id
     ?
     GROUP BY p.id, pi.image_url
-    ORDER BY ?;
+    ORDER BY ?
+    ?;
     `,
-    [whereCond, sortCate]
+    [whereCond, sortCategory , limitOffset]
   );
-  return getAllProducts;
+  return productsAll;
 };
 
 const getProductDetails = async (productId) => {
