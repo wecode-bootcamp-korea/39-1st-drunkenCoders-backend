@@ -1,6 +1,6 @@
 const productsDao = require("../models/productsDao");
 
-const productsAll = async (
+const getAllProducts = async (
   cate_id , sweetness , sourness , carbon , fruit , flower , grain , priceRange , alchol , sort) => {
     const sortCate = (sort) => {
     const sorting = {
@@ -59,7 +59,7 @@ const productsAll = async (
     };
   };
 
-  const products = await productsDao.productsAll(
+  const products = await productsDao.getAllProducts(
     whereList(cate_id , sweetness , sourness , carbon , fruit , flower , grain , priceRange , alchol),
     sortCate(sort)
   );
@@ -67,4 +67,8 @@ const productsAll = async (
   return products;
 };
 
-module.exports = { productsAll };
+const getProductDetails = async (productId) => {
+  return await productsDao.getProductDetails(productId);
+}
+
+module.exports = { getAllProducts, getProductDetails };
