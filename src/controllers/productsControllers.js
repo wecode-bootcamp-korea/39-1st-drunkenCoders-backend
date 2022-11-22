@@ -12,11 +12,11 @@ const getAllProducts = async (req, res) => {
 const getProductDetails = async (req, res) => {
   const productId = req.params.productId
 
-  // if (!productId) {
-  // const err = new Error("KEY ERROR");
-  // err.statusCode = 400;
-  // throw err;
-  // }
+  if (!productId) {
+  const err = new Error("KEY ERROR");
+  err.statusCode = 400;
+  throw err;
+  }
 
   const details = await productsService.getProductDetails(productId)
 
