@@ -20,5 +20,4 @@ const validateEmail = (email) => {
     }
 }
 
-
 module.exports = { validateEmail, validatePassword };

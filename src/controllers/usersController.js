@@ -5,11 +5,11 @@ const register = async (req, res) => {
         const { email, password, nickname } = req.body;
 
         if(!email || !password || !nickname) {
-            res.status(400).json({ message: "빈칸을 채워주세요."});
+            res.status(400).json({ message: "Key error"});
         }
         await userService.register(email, password, nickname);
 
-        res.status(201).json({message: "회원가입을 축하합니다."});
+        res.status(201).json({message: "user create"});
     } catch (err) {
         return res.status(err.statusCode || 500).json({message: err.message})
 }
@@ -31,12 +31,4 @@ const login = async (req, res) => {
     }
 };
 
-const { user } =require('../models/user.dao')
-
-// const unregister = async( req, res )=>{
-//     const { accessToken } = req.body;
-//     const delUser = 
-// }
-
-
-module.exports = { register, login};
+module.exports = { register, login };

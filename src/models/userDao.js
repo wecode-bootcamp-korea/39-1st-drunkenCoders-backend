@@ -16,16 +16,17 @@ const createUser = async (email, hashedPassword, nickname) => {
     const getUserByEmail = async (email) => {
     const [user] = await AppDataSource.query(
         `
-        SELECT *
-        FROM users u
-        WHERE u.email = ?
+        SELECT 
+            users.email
+        FROM 
+            users
+        WHERE 
+            email = ?
         `,
         [email]
     );
 
     return user;
 };
-
-
 
 module.exports = { createUser, getUserByEmail };
