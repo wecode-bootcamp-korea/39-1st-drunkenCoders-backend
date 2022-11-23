@@ -4,6 +4,6 @@ const cartRoutes = require('./cartRoutes');
 
 const routes = express.Router();
 
-routes.use('/cart', cartRoutes);
+routes.use('/carts', cartRoutes);
 
-module.exports = { routes };
+module.exports = routes;

@@ -1,42 +1,46 @@
 const { appDataSource } = require('./data-source');
 
-const addCart = async (cartId, userId, productId, quantity) => {
+const addCart = async (userId, productId, quantity) => {
   await appDataSource.query(
     `
       INSERT INTO cart(
-      id,
       user_id,
       product_id,
       quantity
       )
-      values(?,?,?,?);`,
-    [cartId, userId, productId, quantity]
+      values(?,?,?);`,
+    [userId, productId, quantity]
   );
 };
 
-const checkCart = async (cartId, userId) => {
-  await appDataSource.query(
+const checkCart = async (userId) => {
+  const check = await appDataSource.query(
     `
-      SELECT
-        id,
-        user_id,
-        product_id,
-        quantity,
-        price
-      FROM cart JOIN products
-      ON cart.product_id = products.id
+      SELECT 
+        c.id,
+        c.user_id,
+        c.product_id,
+        c.quantity,
+        p.name,
+        FLOOR(p.price),
+        p.detail_image
+      FROM cart c
+      JOIN products p ON c.product_id = p.id
+      WHERE c.user_id = ?
       `,
-    [cartId, userId]
+    [userId]
   );
+  return check;
 };
 
-const changeCart = async (cartId) => {
+const changeCart = async (quantity, cartId, userId) => {
   await appDataSource.query(
     `
       UPDATE cart
-      SET quantity = quantity + 1
+      SET quantity = ?
+      WHERE cart.id= ? AND user.id= ?
   `,
-    [cartId]
+    [quantity, cartId, userId]
   );
 };
 
@@ -44,9 +48,15 @@ const deleteCart = async (cartId) => {
   await appDataSource.query(
     `
       DELETE FROM cart
+      WHERE id = ?
   `,
     [cartId]
   );
 };
 
-module.exports = { addCart, checkCart, changeCart, deleteCart };
+module.exports = {
+  addCart,
+  checkCart,
+  changeCart,
+  deleteCart,
+};

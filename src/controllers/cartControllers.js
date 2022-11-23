@@ -2,13 +2,12 @@ const cartServices = require('../services/cartServices');
 
 const addCart = async (req, res) => {
   try {
-    const { cartId, userId, productId, quantity } = req.body;
+    const { userId, productId, quantity } = req.body;
 
-    if (!cartId || !userId || !productId || !quantity) {
+    if (!userId || !productId || !quantity) {
       res.status(400).json({ message: 'key error.' });
     }
-    await cartServices.addCart(cartId, userId, productId, quantity);
-
+    await cartServices.addCart(userId, productId, quantity);
     res.status(201).json({ message: 'cart is added.' });
   } catch (err) {
     return res.status(err.statusCode || 500).json({ message: err.message });
@@ -17,16 +16,11 @@ const addCart = async (req, res) => {
 
 const checkCart = async (req, res) => {
   try {
-    const { token } = req.headers;
-    const result = await cartService.cartToken(token);
-    if (!token) {
-      // prettier-ignore
-      res.status(400).json({ message: 'check inf again pls.' });
-    }
-
-    await cartServices.checkCart(token);
+    const { userId } = req.params;
     // prettier-ignore
-    res.status(200).json({ message: 'check ok.', data: result });
+    const check = await cartServices.checkCart(userId);
+    // prettier-ignore
+    res.status(200).json({ data: check });
   } catch (err) {
     return res.status(err.statusCode || 500).json({ message: err.message });
   }
@@ -34,9 +28,9 @@ const checkCart = async (req, res) => {
 
 const changeCart = async (req, res) => {
   try {
-    const { quantity, price } = req.body;
+    const { quantity, cartId, userId } = req.body;
 
-    if (!quantity || !price) {
+    if (!quantity || !cartId || !userId) {
       res.status(400).json({ message: 'change cart pls.' });
     }
     await cartServices.changeCart(quantity, price);
@@ -63,4 +57,9 @@ const delateCart = async (req, res) => {
   }
 };
 
-module.exports = { addCart, checkCart, changeCart, delateCart };
+module.exports = {
+  addCart,
+  checkCart,
+  changeCart,
+  delateCart,
+};
