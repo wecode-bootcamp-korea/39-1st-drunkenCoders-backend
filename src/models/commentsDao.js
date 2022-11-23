@@ -6,7 +6,7 @@ const getCommentsByProductId = async (productId) => {
         SELECT 
             c.id,
             p.name title, 
-            c.rating, 
+            CAST(c.rating*100/5 AS UNSIGNED) AS rating, 
             DATE_FORMAT(
                 c.created_at, '%Y-%c-%d'
                 ) as date, 

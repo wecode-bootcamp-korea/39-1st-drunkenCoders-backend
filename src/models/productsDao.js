@@ -14,7 +14,7 @@ const getAllProducts = async (cate_id , sweetness , sourness , carbon , fruit , 
     SELECT 
         p.id,
         p.name, 
-        p.price, 
+        ROUND(p.price,0) as price, 
         pi.image_url, 
     JSON_ARRAYAGG(
         JSON_OBJECT(
@@ -26,7 +26,7 @@ const getAllProducts = async (cate_id , sweetness , sourness , carbon , fruit , 
         WHERE c.product_id = p.id 
         GROUP BY c.product_id) as reviews, 
     (SELECT 
-        ROUND(AVG(c.rating)*100/5,2) 
+        CAST(AVG(c.rating)*100/5 AS UNSIGNED) 
         FROM comments c 
         WHERE c.product_id = p.id 
         GROUP BY c.product_id) as ratings 
@@ -66,7 +66,7 @@ const getProductDetails = async (productId) => {
       WHERE c.product_id = p.id 
       GROUP BY c.product_id) as reviews, 
     (SELECT 
-      ROUND(AVG(c.rating)*100/5,0)
+      CAST(AVG(c.rating)*100/5 AS UNSIGNED)
       FROM comments c 
       WHERE c.product_id = p.id 
       GROUP BY c.product_id) as ratings
