@@ -21,7 +21,7 @@ const login = async (req, res) => {
         const { email, password } = req.body;
 
         if(!email ||!password) 
-        return res.status(400).json({'message':'Username and password are empty'})
+            return res.status(400).json({'message':'Username and password are empty'})
 
         const accessToken = await userService.login(email, password);
 
