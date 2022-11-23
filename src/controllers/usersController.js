@@ -34,7 +34,6 @@ const login = async (req, res) => {
 const checknick = async (req, res) => {
     try {
         const { nickname } = req.params;
-console.log(nickname)
 
         if( !nickname ) {
         return res.status(400).json({ message : 'Key error' });
