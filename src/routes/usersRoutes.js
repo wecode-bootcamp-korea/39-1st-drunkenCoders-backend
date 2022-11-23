@@ -6,6 +6,6 @@ const usersRoutes = express.Router();
 
 usersRoutes.post("/register", userController.register);
 usersRoutes.post("/login", userController.login);
-usersRoutes.post("/checknick", userController.checknick);
+usersRoutes.get("/:nickname", userController.checknick);
 
 module.exports = { usersRoutes };

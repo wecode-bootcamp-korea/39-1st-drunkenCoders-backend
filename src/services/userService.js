@@ -49,6 +49,7 @@ const login = async (email, password) => {
 
 const checknick = async (nickname) => {
     const nick =  await userDao.getUserByNickname(nickname);
+    console.log(nick)
     if (nick) {
         const err = new Error("duplicated nickname");
         err.statusCdoe=400;

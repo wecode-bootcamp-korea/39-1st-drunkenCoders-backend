@@ -33,13 +33,14 @@ const login = async (req, res) => {
 
 const checknick = async (req, res) => {
     try {
-        const { nickname } = req.body;
+        const { nickname } = req.params;
+console.log(nickname)
 
         if( !nickname ) {
         return res.status(400).json({ message : 'Key error' });
         }
         await userService.checknick(nickname);
-        res.status(200).json({'message':'nickname created'});
+        res.status(200).json({'message':'Available nickname'});
     } catch (err) {
         res.status(err.stautsCode || 401 ).json({ message: err.message });
     }
