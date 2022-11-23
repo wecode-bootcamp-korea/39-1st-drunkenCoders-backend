@@ -8,7 +8,6 @@ const getAllProducts = async (cate_id , sweetness , sourness , carbon , fruit , 
   const whereCond = whereList.makeWhereList(cate_id , sweetness , sourness , carbon , fruit , flower , grain , priceRange , alchol);
   const sortCategory = sortList.makeSort(sort);
   const limitOffset = limitAndOffset.setLimitOffset(limit, offset);
-
   const productsAll = await AppDataSource.query(
     `
     SELECT 
