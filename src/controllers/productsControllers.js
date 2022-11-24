@@ -13,8 +13,8 @@ const getProductDetails = async (req, res) => {
   const productId = req.params.productId
 
   if (!productId) {
-  const err = new Error("KEY ERROR");
-  err.statusCode = 400;
+  const err = new Error("NOT FOUND");
+  err.statusCode = 404;
   throw err;
   }
 

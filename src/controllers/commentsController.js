@@ -4,8 +4,8 @@ const getCommentsByProductId = async (req,res) => {
     const {productId} = req.params;
 
     if(!productId){
-        const err = new Error("KEY ERROR");
-        err.statuscode = 400;
+        const err = new Error("NOT FOUND");
+        err.statuscode = 404;
         throw err
     };
 
