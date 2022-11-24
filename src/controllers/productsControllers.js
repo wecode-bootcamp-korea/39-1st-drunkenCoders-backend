@@ -10,16 +10,19 @@ const getAllProducts = async (req, res) => {
 };
 
 const getProductDetails = async (req, res) => {
+  try {
   const productId = req.params.productId
 
-  if (!productId) {
-  const err = new Error("NOT FOUND");
-  err.statusCode = 404;
-  throw err;
+  const details = await productsService.getProductDetails(productId)
+  if (details.length == 0){
+    const err = new Error("NO PRODUCTS FOUND")
+    err.status = 404
+    throw err
+  }
+  return res.status(200).json({data : details})
+  } catch (err){
+    res.status(err.status).json({message : err.message})
   }
 
-  const details = await productsService.getProductDetails(productId)
-
-  return res.status(200).json({data : details})
 }
 module.exports = { getAllProducts , getProductDetails };
