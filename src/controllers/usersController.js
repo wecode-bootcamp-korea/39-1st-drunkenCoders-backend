@@ -4,10 +4,9 @@ const register = async (req, res) => {
   try {
     console.log(req.body);
     const { email, password, nickname } = req.body;
-    console.log(email);
 
     if (!email || !password || !nickname) {
-      res.status(400).json({ message: "Key error" });
+      return res.status(400).json({ message: "Key error" });
     }
     await userService.register(email, password, nickname);
 
