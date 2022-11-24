@@ -2,7 +2,6 @@ const userService = require("../services/userService");
 
 const register = async (req, res) => {
   try {
-    console.log(req.body);
     const { email, password, nickname } = req.body;
 
     if (!email || !password || !nickname) {

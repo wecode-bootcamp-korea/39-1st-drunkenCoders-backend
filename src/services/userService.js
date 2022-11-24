@@ -23,6 +23,7 @@ const register = async (email, password, nickname) => {
 
 const login = async (email, password) => {
   const user = await userDao.getUserByEmail(email);
+
   if (!email.includes("@") || !email.includes(".")) {
     const err = new Error("invalid email");
     err.statusCode = 400;
@@ -35,13 +36,14 @@ const login = async (email, password) => {
     throw err;
   }
   const match = await bcrypt.compare(password, user.password);
+
   if (!match) {
     const err = new Error("invalid password");
     err.statusCode = 401;
     throw err;
   }
 
-  return jwt.sign({ sub: user.id }, process.env.JWT_SECRET);
+  return jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
 };
 
 module.exports = { register, login };

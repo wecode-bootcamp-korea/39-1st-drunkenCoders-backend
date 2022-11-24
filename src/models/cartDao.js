@@ -1,7 +1,7 @@
 const { AppDataSource } = require("./data-source");
 
 const addCart = async (userId, productId, quantity) => {
-  await AppDataSource.query(
+  const result = await AppDataSource.query(
     `
       INSERT INTO cart(
       user_id,
@@ -11,10 +11,11 @@ const addCart = async (userId, productId, quantity) => {
       values(?,?,?);`,
     [userId, productId, quantity]
   );
+  return result;
 };
 
 const checkCart = async (userId) => {
-  const check = await AppDataSource.query(
+  const result = await AppDataSource.query(
     `
       SELECT 
         c.id,
@@ -30,28 +31,30 @@ const checkCart = async (userId) => {
       `,
     [userId]
   );
-  return check;
+  return result;
 };
 
 const changeCart = async (quantity, cartId, userId) => {
-  await AppDataSource.query(
+  const result = await AppDataSource.query(
     `
       UPDATE cart
       SET quantity = ?
-      WHERE cart.id= ? AND user.id= ?
+      WHERE id= ? AND user_id= ?
   `,
     [quantity, cartId, userId]
   );
+  return result;
 };
 
-const deleteCart = async (cartId) => {
-  await AppDataSource.query(
+const deleteCart = async (userId, cartId) => {
+  const result = await AppDataSource.query(
     `
       DELETE FROM cart
-      WHERE id = ?
+      WHERE id = ? AND user_id = ?
   `,
-    [cartId]
+    [cartId, userId]
   );
+  return result;
 };
 
 module.exports = {
