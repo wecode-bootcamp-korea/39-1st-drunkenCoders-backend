@@ -4,7 +4,6 @@ const bcrypt = require("bcrypt");
 const userDao = require("../models/userDao");
 const { validateEmail } = require("../utils/validation");
 const { validatePassword } = require('../utils/validation');
-const { usersRouter } = require('../routes/usersRoutes');
 
 
 const register = async (email, password, nickname) => {

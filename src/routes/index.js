@@ -5,7 +5,7 @@ const { usersRoutes } = require("./usersRoutes");
 
 const routes = express.Router();
 
-routes.use("/users", usersRoutes);
 routes.use("/products", productsRoutes);
+routes.use("/users", usersRoutes);
 
 module.exports = { routes };
