@@ -17,17 +17,11 @@ const getCommentsByProductId = async (productId) => {
         FROM comments c 
         LEFT JOIN users u ON u.id = c.user_id 
         LEFT JOIN comments_images ci ON ci.comment_id = c.id 
-        LEFT JOIN products p ON p.id = c.product_id
+        JOIN products p ON p.id = c.product_id
         WHERE c.product_id = ?;
         `,
         [productId]
     )
-    if(!comments){
-        const err = new Error("NO REVIEWS")
-        err.statuscode = 204
-        throw err
-
-    }
     return comments
 }
 
