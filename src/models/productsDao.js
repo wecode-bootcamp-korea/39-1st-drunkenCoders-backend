@@ -14,7 +14,7 @@ const getAllProducts = async (cate_id , sweetness , sourness , carbon , fruit , 
     SELECT 
         p.id,
         p.name, 
-        p.price, 
+        ROUND(p.price,0) as price, 
         pi.image_url, 
     JSON_ARRAYAGG(
         JSON_OBJECT(
