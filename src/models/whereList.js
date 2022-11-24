@@ -8,7 +8,7 @@ const makeWhereList = (
       const orS = cate_id.map(el => `categories_id=${el}`).join(" or ")
         filter.push(orS);
       } else if (typeof(cate_id) == 'string'){
-        filter.push(`categoreis_id=${cate_id}`)
+        filter.push(`categories_id=${cate_id}`)
       };
     if (typeof(sweetness) == 'object'){
       const orS = sweetness.map(el => `sweetness_id=${el}`).join(" or ")
