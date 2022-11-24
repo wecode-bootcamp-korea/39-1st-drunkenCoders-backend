@@ -3,7 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
-const { globalErrorHandler } = require('./src/utils/errorHandler');
+const { globalErrorHandler } = require("./src/utils/errorHandler");
 
 dotenv.config();
 

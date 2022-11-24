@@ -6,16 +6,15 @@ const AppDataSource = new DataSource({
   port: process.env.TYPEORM_PORT,
   username: process.env.TYPEORM_USERNAME,
   password: process.env.TYPEORM_PASSWORD,
-  database: process.env.TYPEORM_DATABASE
+  database: process.env.TYPEORM_DATABASE,
 });
 
-AppDataSource
-  .initialize()
+AppDataSource.initialize()
   .then(() => {
-    console.log("Data Source has been initialized!");
+    console.log("Data Source has been initialised!");
   })
   .catch((err) => {
-    console.error("Error during Data Source initialization", err);
+    console.error("Error during Data Source initialisation", err);
   });
 
 module.exports = { AppDataSource };
