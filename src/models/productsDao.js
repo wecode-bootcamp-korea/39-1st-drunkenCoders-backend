@@ -8,7 +8,6 @@ const getAllProducts = async (cate_id , sweetness , sourness , carbon , fruit , 
   const whereCond = whereList.makeWhereList(cate_id , sweetness , sourness , carbon , fruit , flower , grain , priceRange , alchol);
   const sortCategory = sortList.makeSort(sort);
   const limitOffset = limitAndOffset.setLimitOffset(limit, offset);
-
   const productsAll = await AppDataSource.query(
     `
     SELECT 
@@ -26,7 +25,7 @@ const getAllProducts = async (cate_id , sweetness , sourness , carbon , fruit , 
         WHERE c.product_id = p.id 
         GROUP BY c.product_id) as reviews, 
     (SELECT 
-        ROUND(AVG(c.rating)*100/5,2) 
+        CAST(AVG(c.rating)*100/5 AS UNSIGNED) 
         FROM comments c 
         WHERE c.product_id = p.id 
         GROUP BY c.product_id) as ratings 
@@ -66,7 +65,7 @@ const getProductDetails = async (productId) => {
       WHERE c.product_id = p.id 
       GROUP BY c.product_id) as reviews, 
     (SELECT 
-      ROUND(AVG(c.rating)*100/5,0)
+      CAST(AVG(c.rating)*100/5 AS UNSIGNED)
       FROM comments c 
       WHERE c.product_id = p.id 
       GROUP BY c.product_id) as ratings
