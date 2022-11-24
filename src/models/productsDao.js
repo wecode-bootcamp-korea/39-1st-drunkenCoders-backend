@@ -41,7 +41,7 @@ const getAllProducts = async (cate_id , sweetness , sourness , carbon , fruit , 
   );
   return productsAll;
     } catch(err){
-      return res.status(400).json({ message: err.message });
+      return err.message 
     }
 };
 
