@@ -46,4 +46,13 @@ const login = async (email, password) => {
   return jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
 };
 
-module.exports = { register, login };
+const checknick = async (nickname) => {
+  const nick = await userDao.getUserByNickname(nickname);
+  if (nick) {
+    const err = new Error("duplicated nickname");
+    err.statusCdoe = 400;
+    throw err;
+  }
+};
+
+module.exports = { register, login, checknick };
