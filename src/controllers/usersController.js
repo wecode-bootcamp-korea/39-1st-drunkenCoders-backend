@@ -31,4 +31,18 @@ const login = async (req, res) => {
     }
 };
 
-module.exports = { register, login };
+const checknick = async (req, res) => {
+    try {
+        const { nickname } = req.params;
+
+        if( !nickname ) {
+        return res.status(400).json({ message : 'Key error' });
+        }
+        await userService.checknick(nickname);
+        res.status(200).json({'message':'Available nickname'});
+    } catch (err) {
+        res.status(err.stautsCode || 401 ).json({ message: err.message });
+    }
+};
+
+module.exports = { register, login, checknick };
