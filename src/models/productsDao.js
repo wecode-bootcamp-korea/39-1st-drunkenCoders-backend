@@ -1,11 +1,33 @@
 const { AppDataSource } = require("./data-source");
-const  whereList  = require("./whereList")
-const sortList = require("./sortList")
-const limitAndOffset = require("./limitAndOffset")
+const whereList = require("./whereList");
+const sortList = require("./sortList");
+const limitAndOffset = require("./limitAndOffset");
 
-const getAllProducts = async (cate_id , sweetness , sourness , carbon , fruit , flower , grain , priceRange , alchol, sort , limit, offset) => {
-
-  const whereCond = whereList.makeWhereList(cate_id , sweetness , sourness , carbon , fruit , flower , grain , priceRange , alchol);
+const getAllProducts = async (
+  cate_id,
+  sweetness,
+  sourness,
+  carbon,
+  fruit,
+  flower,
+  grain,
+  priceRange,
+  alchol,
+  sort,
+  limit,
+  offset
+) => {
+  const whereCond = whereList.makeWhereList(
+    cate_id,
+    sweetness,
+    sourness,
+    carbon,
+    fruit,
+    flower,
+    grain,
+    priceRange,
+    alchol
+  );
   const sortCategory = sortList.makeSort(sort);
   const limitOffset = limitAndOffset.setLimitOffset(limit, offset);
 
@@ -16,7 +38,7 @@ const getAllProducts = async (cate_id , sweetness , sourness , carbon , fruit , 
         p.name, 
         p.price, 
         pi.image_url, 
-    JSON_ARRAYAGG(
+    JSON_ARRAYAGG(d
         JSON_OBJECT(
             "tags",t.name
             )) as tags, 
@@ -38,7 +60,7 @@ const getAllProducts = async (cate_id , sweetness , sourness , carbon , fruit , 
     ORDER BY ?
     ?;
     `,
-    [whereCond, sortCategory , limitOffset]
+    [whereCond, sortCategory, limitOffset]
   );
   return productsAll;
 };

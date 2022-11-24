@@ -1,7 +1,7 @@
-const { appDataSource } = require('./data-source');
+const { AppDataSource } = require("./data-source");
 
 const addCart = async (userId, productId, quantity) => {
-  await appDataSource.query(
+  await AppDataSource.query(
     `
       INSERT INTO cart(
       user_id,
@@ -14,7 +14,7 @@ const addCart = async (userId, productId, quantity) => {
 };
 
 const checkCart = async (userId) => {
-  const check = await appDataSource.query(
+  const check = await AppDataSource.query(
     `
       SELECT 
         c.id,
@@ -34,7 +34,7 @@ const checkCart = async (userId) => {
 };
 
 const changeCart = async (quantity, cartId, userId) => {
-  await appDataSource.query(
+  await AppDataSource.query(
     `
       UPDATE cart
       SET quantity = ?
@@ -45,7 +45,7 @@ const changeCart = async (quantity, cartId, userId) => {
 };
 
 const deleteCart = async (cartId) => {
-  await appDataSource.query(
+  await AppDataSource.query(
     `
       DELETE FROM cart
       WHERE id = ?
