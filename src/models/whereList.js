@@ -54,7 +54,6 @@ const makeWhereList = (
     }
     const body = filter.join(" AND ");
     const combined = startLine + body;
-    console.log(combined)
     return {
       toSqlString: function () {
         return combined;

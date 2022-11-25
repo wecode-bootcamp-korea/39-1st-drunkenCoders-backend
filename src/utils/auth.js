@@ -3,7 +3,7 @@ const key = process.env.JWT_SECRET;
 const validToken = async (req, res, next) => {
   try {
     const userToken = req.headers.authorization;
-
+    console.log(userToken)
     if (!userToken) return res.status(400).json({ message: "Auth error" });
 
     const decoded = jwt.verify(userToken, key);

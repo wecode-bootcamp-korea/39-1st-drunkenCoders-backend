@@ -15,7 +15,7 @@ const getAllProducts = async (cate_id , sweetness , sourness , carbon , fruit , 
         p.name, 
         ROUND(p.price,0) as price, 
         pi.image_url, 
-    JSON_ARRAYAGG(d
+    JSON_ARRAYAGG(
         JSON_OBJECT(
             "tags",t.name
             )) as tags, 
