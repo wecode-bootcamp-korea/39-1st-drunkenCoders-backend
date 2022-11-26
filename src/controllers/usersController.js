@@ -18,7 +18,6 @@ const register = async (req, res) => {
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    console.log(req.body)
 
     if (!email || !password)
       return res
@@ -26,7 +25,6 @@ const login = async (req, res) => {
         .json({ message: "Username and password are empty" });
 
     const accessToken = await userService.login(email, password);
-    console.log(accessToken)
 
     res.status(200).json({ accessToken: accessToken });
   } catch (err) {
