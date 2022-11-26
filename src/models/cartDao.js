@@ -1,6 +1,7 @@
 const { AppDataSource } = require("./data-source");
 
 const addCart = async (userId, productId, quantity) => {
+
   const result = await AppDataSource.query(
     `
       INSERT INTO cart(
@@ -23,10 +24,11 @@ const checkCart = async (userId) => {
         c.product_id,
         c.quantity,
         p.name,
-        FLOOR(p.price),
-        p.detail_image
+        p.price,
+        pi.image_url
       FROM cart c
       JOIN products p ON c.product_id = p.id
+      JOIN product_images pi ON pi.id = p.id
       WHERE c.user_id = ?
       `,
     [userId]

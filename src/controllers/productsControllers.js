@@ -10,8 +10,8 @@ const getAllProducts = async (req, res) => {
 };
 
 const getProductDetails = async (req, res) => {
-  const productId = req.params.productId
   try {
+  const productId = req.params.productId
   const details = await productsService.getProductDetails(productId)
   if (details.length == 0){
     const err = new Error("NO PRODCUTS FOUND")
